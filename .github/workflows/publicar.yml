@@ -1,0 +1,74 @@
+# Publica la página automáticamente cada vez que alguien sube fotos o edita un partido.
+# No hace falta tocar este archivo.
+name: Publicar página
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Revisar data/partidos.js
+        run: |
+          node -e '
+            global.window = {};
+            require("./data/partidos.js");
+            const d = window.MACABI_DATOS;
+            if (!d || !Array.isArray(d.partidos)) throw new Error("No se encontró la lista de partidos");
+            const ids = new Set();
+            d.partidos.forEach((p, i) => {
+              if (!p.id || !p.fecha) throw new Error("Al partido número " + (i + 1) + " le falta id o fecha");
+              if (!/^\d{4}-\d{2}-\d{2}$/.test(p.fecha)) throw new Error("Fecha mal escrita en " + p.id + " (usar AÑO-MES-DÍA)");
+              if (ids.has(p.id)) throw new Error("Hay dos partidos con el mismo id: " + p.id);
+              ids.add(p.id);
+            });
+            console.log("OK: " + d.partidos.length + " partidos");
+          '
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detectar fotos y crear miniaturas
+        run: |
+          pip install --quiet pillow
+          python3 herramientas/actualizar_fotos.py
+
+      - name: Guardar lista de fotos y miniaturas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/fotos.js fotos
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar fotos (automático)"
+            git pull --rebase
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
