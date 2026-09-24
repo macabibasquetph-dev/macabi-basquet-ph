@@ -44,8 +44,12 @@
 
 window.MACABI_DATOS = {
 
-  // Foto grande de la portada (reemplazala por una tuya: por ejemplo "fotos/portada.jpg")
-  portada: "fotos/portada.svg",
+  // Logo que aparece en la portada (JPG o PNG dentro de la carpeta fotos)
+  logo: "fotos/logo.jpg",
+
+  // Foto de fondo de la portada (opcional). Vacío = fondo oscuro.
+  // Para usar una foto: portada: "fotos/portada.jpg",
+  portada: "",
 
   // Orden en que se muestran las categorías
   categorias: ["Premini", "Mini", "U13", "U15", "U17", "U19", "Primera", "Otras"],
