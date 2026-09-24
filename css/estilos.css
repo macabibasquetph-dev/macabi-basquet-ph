@@ -292,6 +292,16 @@ body[data-vista="inicio"] #contenido { padding-top: 0; }
   padding: calc(var(--alto-barra) + 24px) var(--margen) 28px;
   isolation: isolate;
 }
+.hero {
+  background:
+    radial-gradient(70% 55% at 50% 22%, rgba(255, 106, 19, 0.16), transparent 70%),
+    var(--negro);
+}
+/* Logo sobre fondo negro: "lighten" hace que el negro del logo se funda con el fondo */
+.hero-logo {
+  display: block; width: clamp(170px, 52vw, 250px); aspect-ratio: 1; object-fit: contain;
+  margin: 0 auto 20px; mix-blend-mode: lighten;
+}
 .hero-foto {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
   z-index: -3;
@@ -729,6 +739,11 @@ body[data-vista="inicio"] #contenido { padding-top: 0; }
   .partido-cabecera { padding: 36px var(--margen) 44px; }
   .pie-in { grid-template-columns: 1fr auto; align-items: center; }
   .pie-copy { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1200px) {
+  .hero-contenido { position: relative; }
+  .hero-logo { position: absolute; right: 0; bottom: 0; width: clamp(320px, 30vw, 440px); margin: 0; }
 }
 
 @media (min-width: 1400px) {
