@@ -179,7 +179,7 @@
   // VISTAS
   // ======================================================================
   function vistaInicio() {
-    var portada = D.portada || (partidos[0] && partidos[0].portada && partidos[0].portada.src) || "";
+    var portada = D.portada || "";
     var ultimos = partidos.slice(0, 6);
     var conFotos = categorias.filter(function (c) { return deCategoria(c).length; });
 
@@ -188,6 +188,7 @@
         (portada ? '<img class="hero-foto" src="' + esc(portada) + '" alt="Fotografía de básquet de Macabi" fetchpriority="high">' : "") +
         '<div class="hero-sombra"></div>' + CANCHA_SVG +
         '<div class="hero-contenido">' +
+          (D.logo ? '<img class="hero-logo" src="' + esc(D.logo) + '" alt="Logo de Macabi Básquet" onerror="this.remove()">' : "") +
           '<p class="hero-sub"><span class="en-vivo"></span>Fotografía de básquet • Momentos que quedan</p>' +
           '<h1 class="hero-titulo"><span class="l1">MACABI</span> <span class="l2"><em>BÁSQUET</em> PH</span></h1>' +
           '<p class="hero-frase">Cada partido tiene una historia.<br><strong>Nosotros la capturamos.</strong></p>' +
