@@ -29,7 +29,6 @@ import re
 import shutil
 import subprocess
 import sys
-from datetime import datetime
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARPETA_FOTOS = os.path.join(RAIZ, "fotos")
@@ -163,9 +162,10 @@ def main():
                           "(agregalo con ese mismo id para que aparezca).")
 
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as f:
+        # Sin fecha/hora adentro: si las fotos no cambian, el archivo queda idéntico
+        # (así varias actualizaciones seguidas no chocan entre sí).
         f.write("/* ARCHIVO GENERADO AUTOMÁTICAMENTE por herramientas/actualizar_fotos.py\n")
-        f.write(f"   Última actualización: {datetime.now():%d/%m/%Y %H:%M}\n")
-        f.write("   No hace falta editarlo a mano: volvé a correr la herramienta cuando agregues fotos. */\n")
+        f.write("   No hace falta editarlo a mano: se actualiza solo cuando se suben fotos. */\n")
         f.write("window.MACABI_FOTOS = ")
         json.dump(resultado, f, ensure_ascii=False, indent=2)
         f.write(";\n")
