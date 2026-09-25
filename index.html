@@ -27,6 +27,7 @@
     <symbol id="i-inicio" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/></symbol>
     <symbol id="i-fotos" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></g></symbol>
     <symbol id="i-partidos" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></g></symbol>
+    <symbol id="i-eventos" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3M12 14v3M8 21h8M9 17h6v4H9z"/></g></symbol>
     <symbol id="i-categorias" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></g></symbol>
     <symbol id="i-buscar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></g></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
@@ -48,10 +49,12 @@
         <svg class="marca-balon" aria-hidden="true"><use href="#i-balon"/></svg>
         <span class="marca-txt">MACABI <em>BÁSQUET</em> PH</span>
       </a>
+      <a href="#/categorias" data-nav="categorias" class="barra-cat" aria-label="Categorías"><svg aria-hidden="true"><use href="#i-categorias"/></svg><span>Categorías</span></a>
       <nav class="nav" aria-label="Principal">
         <a href="#/" data-nav="inicio">Inicio</a>
         <a href="#/fotos" data-nav="fotos">Fotos</a>
         <a href="#/partidos" data-nav="partidos">Partidos</a>
+        <a href="#/eventos" data-nav="eventos">Eventos</a>
         <a href="#/categorias" data-nav="categorias">Categorías</a>
         <a href="#/buscar" data-nav="buscar" class="nav-buscar"><svg aria-hidden="true"><use href="#i-buscar"/></svg>Buscar</a>
       </nav>
@@ -72,6 +75,7 @@
       <nav class="pie-nav" aria-label="Pie de página">
         <a href="#/fotos">Fotos</a>
         <a href="#/partidos">Partidos</a>
+        <a href="#/eventos">Eventos</a>
         <a href="#/categorias">Categorías</a>
         <a href="#/buscar">Buscar</a>
       </nav>
@@ -85,7 +89,7 @@
     <a href="#/fotos" data-nav="fotos"><svg aria-hidden="true"><use href="#i-fotos"/></svg><span>Fotos</span></a>
     <a href="#/buscar" data-nav="buscar" class="tabbar-buscar"><svg aria-hidden="true"><use href="#i-buscar"/></svg><span>Buscar</span></a>
     <a href="#/partidos" data-nav="partidos"><svg aria-hidden="true"><use href="#i-partidos"/></svg><span>Partidos</span></a>
-    <a href="#/categorias" data-nav="categorias"><svg aria-hidden="true"><use href="#i-categorias"/></svg><span>Categorías</span></a>
+    <a href="#/eventos" data-nav="eventos"><svg aria-hidden="true"><use href="#i-eventos"/></svg><span>Eventos</span></a>
   </nav>
 
   <!-- Visor de fotos a pantalla completa -->
