@@ -53,6 +53,9 @@
     out.fotos = fotos;
     out.portada = fotos[iPortada >= 0 ? iPortada : 0] || null;
     out.marcador = m ? { propio: +m[1], rival: +m[2] } : null;
+    // Evento = sin rival (torneo, encuentro, clínica, festejo) o con tipo: "evento"
+    out.esEvento = p.tipo ? p.tipo === "evento" : !p.rival;
+    out.etiquetas = (p.etiquetas || []).concat(out.esEvento ? ["evento", "eventos"] : ["partido", "partidos"]);
     out.indice = U.indiceBusqueda(out);
     return out;
   }
@@ -73,6 +76,13 @@
   var temporadas = (D.temporadas || []).map(String);
   partidos.forEach(function (p) { if (temporadas.indexOf(p.temporada) < 0) temporadas.push(p.temporada); });
   temporadas.sort(function (a, b) { return b.localeCompare(a); });
+
+  // Fecha de hoy (AAAA-MM-DD) para separar partidos jugados de próximos
+  var hoy = (function () { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); })();
+  function esProximo(p) { return p.fecha > hoy; }
+  var jugados = partidos.filter(function (p) { return !esProximo(p); });
+  function porFechaAsc(a, b) { return a.fecha.localeCompare(b.fecha); }
+  var proximos = partidos.filter(esProximo).sort(porFechaAsc); // del más cercano al más lejano
 
   var totalFotos = partidos.reduce(function (s, p) { return s + p.fotos.length; }, 0);
 
@@ -180,7 +190,9 @@
   // ======================================================================
   function vistaInicio() {
     var portada = D.portada || "";
-    var ultimos = partidos.slice(0, 6);
+    var ultimos = jugados.slice(0, 6);
+    var tituloUltimos = "Últimos partidos";
+    if (!ultimos.length && proximos.length) { ultimos = proximos.slice(0, 6); tituloUltimos = "Próximos partidos"; }
     var conFotos = categorias.filter(function (c) { return deCategoria(c).length; });
 
     return (
@@ -213,7 +225,7 @@
       "</section>" +
 
       '<section class="bloque" id="ultimos">' +
-        '<div class="fila-titulo aparecer"><h2 class="titulo-bloque">Últimos partidos</h2>' +
+        '<div class="fila-titulo aparecer"><h2 class="titulo-bloque">' + tituloUltimos + '</h2>' +
         '<a class="link-mas" href="#/partidos">Ver todos ' + icono("flecha") + "</a></div>" +
         (ultimos.length ? grillaAlbumes(ultimos) : vacio("Todavía no hay partidos", "Muy pronto vas a encontrar acá las primeras fotos.")) +
       "</section>" +
@@ -292,41 +304,66 @@
     });
   }
 
-  // --- PARTIDOS: lista cronológica agrupada por mes ---
-  function vistaPartidos(params) {
+  // --- PARTIDOS y EVENTOS: lista cronológica agrupada por mes ---
+  function vistaPartidos(params) { return vistaCalendario(params, false); }
+  function vistaEventos(params) { return vistaCalendario(params, true); }
+
+  function filaCalendario(p) {
+    var f = U.leerFecha(p.fecha);
+    var estado = esProximo(p)
+      ? " · " + (p.hora ? p.hora + " hs" : "próximamente")
+      : (p.fotos.length ? " · " + plural(p.fotos.length, "foto", "fotos") : " · fotos en camino");
+    return '<li><a class="fila-partido" href="#/partido/' + encodeURIComponent(p.id) + '">' +
+      '<span class="fecha-bloque"><b>' + (f ? f.d : "") + "</b><small>" + U.mesCorto(p.fecha) + "</small></span>" +
+      '<span class="fila-cuerpo">' +
+        '<span class="fila-meta"><span class="etiqueta etiqueta-chica">' + esc(p.categoria) + "</span>" + esc(p.evento || "") + "</span>" +
+        tituloPartido(p, "strong") +
+        '<span class="fila-lugar">' + icono("pin") + esc(p.sede || p.lugar || "") + estado + "</span>" +
+      "</span>" +
+      '<span class="fila-fin">' + resultadoCorto(p) + icono("der", "fila-flecha") + "</span>" +
+    "</a></li>";
+  }
+
+  function vistaCalendario(params, eventos) {
+    var ruta = eventos ? "#/eventos" : "#/partidos";
     var temp = params.get("temporada") || "";
-    var lista = partidos.filter(function (p) { return !temp || p.temporada === temp; });
+    var lista = partidos.filter(function (p) { return p.esEvento === eventos && (!temp || p.temporada === temp); });
 
-    var grupos = [], actual = null;
-    lista.forEach(function (p) {
-      var mes = U.mesAnio(p.fecha);
-      if (!actual || actual.mes !== mes) { actual = { mes: mes, items: [] }; grupos.push(actual); }
-      actual.items.push(p);
-    });
+    function agrupar(items) {
+      var grupos = [], actual = null;
+      items.forEach(function (p) {
+        var mes = U.mesAnio(p.fecha);
+        if (!actual || actual.mes !== mes) { actual = { mes: mes, items: [] }; grupos.push(actual); }
+        actual.items.push(p);
+      });
+      return grupos;
+    }
+    var prox = agrupar(lista.filter(esProximo).sort(porFechaAsc));
+    var jug = agrupar(lista.filter(function (p) { return !esProximo(p); }));
+    var nombre = eventos ? "eventos" : "partidos";
 
-    return encabezado("Calendario", "Partidos", "Todos los partidos y eventos fotografiados, en orden cronológico.") +
+    function pintarGrupos(grupos) {
+      return grupos.map(function (g) {
+        return '<div class="mes aparecer"><h3 class="mes-titulo">' + esc(g.mes) + "</h3><ul class=\"lista-partidos\">" +
+          g.items.map(filaCalendario).join("") + "</ul></div>";
+      }).join("");
+    }
+
+    return (eventos
+        ? encabezado("Club", "Eventos", "Torneos, encuentros, clínicas y festejos del básquet de Macabi.")
+        : encabezado("Calendario", "Partidos", "Todos los partidos fotografiados, en orden cronológico.")) +
       '<section class="bloque bloque-filtros"><div class="chips chips-desliza">' +
-        '<a class="chip' + (!temp ? " chip-activo" : "") + '" href="#/partidos">Todas las temporadas</a>' +
+        '<a class="chip' + (!temp ? " chip-activo" : "") + '" href="' + ruta + '">Todas las temporadas</a>' +
         temporadas.map(function (t) {
-          return '<a class="chip' + (temp === t ? " chip-activo" : "") + '" href="#/partidos?temporada=' + encodeURIComponent(t) + '">Temporada ' + esc(t) + "</a>";
+          return '<a class="chip' + (temp === t ? " chip-activo" : "") + '" href="' + ruta + '?temporada=' + encodeURIComponent(t) + '">Temporada ' + esc(t) + "</a>";
         }).join("") +
       "</div></section>" +
       '<section class="bloque">' +
-      (grupos.length ? grupos.map(function (g) {
-        return '<div class="mes aparecer"><h2 class="mes-titulo">' + esc(g.mes) + "</h2><ul class=\"lista-partidos\">" +
-          g.items.map(function (p) {
-            var f = U.leerFecha(p.fecha);
-            return '<li><a class="fila-partido" href="#/partido/' + encodeURIComponent(p.id) + '">' +
-              '<span class="fecha-bloque"><b>' + (f ? f.d : "") + "</b><small>" + U.mesCorto(p.fecha) + "</small></span>" +
-              '<span class="fila-cuerpo">' +
-                '<span class="fila-meta"><span class="etiqueta etiqueta-chica">' + esc(p.categoria) + "</span>" + esc(p.evento || "") + "</span>" +
-                tituloPartido(p, "strong") +
-                '<span class="fila-lugar">' + icono("pin") + esc(p.lugar || "") + (p.fotos.length ? " · " + plural(p.fotos.length, "foto", "fotos") : " · fotos en camino") + "</span>" +
-              "</span>" +
-              '<span class="fila-fin">' + resultadoCorto(p) + icono("der", "fila-flecha") + "</span>" +
-            "</a></li>";
-          }).join("") + "</ul></div>";
-      }).join("") : vacio("Sin partidos en esta temporada", "Cuando haya fotos nuevas van a aparecer acá.")) +
+      (prox.length ? '<h2 class="titulo-bloque">Próximos ' + nombre + "</h2>" + pintarGrupos(prox) : "") +
+      (jug.length ? '<h2 class="titulo-bloque"' + (prox.length ? ' style="margin-top:44px"' : "") + ">" + (eventos ? "Eventos realizados" : "Partidos jugados") + "</h2>" + pintarGrupos(jug) : "") +
+      (!prox.length && !jug.length ? (eventos
+        ? vacio("Todavía no hay eventos", "Muy pronto vas a encontrar acá las fotos de torneos, encuentros, clínicas y festejos.")
+        : vacio("Todavía no hay partidos", "Cuando haya fotos nuevas van a aparecer acá.")) : "") +
       "</section>";
   }
 
@@ -401,7 +438,7 @@
           '<div class="aparecer">' + tituloPartido(p, "h1") + "</div>" +
           marcador +
           '<ul class="partido-datos aparecer">' +
-            '<li><span>Fecha</span><strong>' + esc(U.fechaLarga(p.fecha)) + "</strong></li>" +
+            '<li><span>Fecha</span><strong>' + esc(U.fechaLarga(p.fecha)) + (p.hora ? " · " + esc(p.hora) + " hs" : "") + "</strong></li>" +
             '<li><span>Lugar</span><strong>' + esc([p.sede, p.lugar].filter(Boolean).join(" · ")) + "</strong></li>" +
             (p.evento ? "<li><span>Evento</span><strong>" + esc(p.evento) + "</strong></li>" : "") +
             "<li><span>Fotos</span><strong>" + p.fotos.length + "</strong></li>" +
@@ -420,7 +457,9 @@
               '<img src="' + esc(f.mini) + '" alt="Foto ' + (i + 1) + " — " + esc(p.titulo) + '" loading="' + (i < 8 ? "eager" : "lazy") + '" decoding="async"></a>';
           }).join("") + "</div>" +
           '<p class="nota-original">' + icono("camara") + "Tocá una foto para verla en grande y descargarla. Las fotos se muestran y descargan en su archivo original, sin filtros ni retoques automáticos.</p>"
-          : vacio("Fotos en camino", "Las fotos de este partido se están subiendo. ¡Volvé en un rato!")) +
+          : (esProximo(p)
+            ? vacio("Todavía no se jugó", "Las fotos van a estar acá después del partido. ¡Nos vemos en la cancha!")
+            : vacio("Fotos en camino", "Las fotos de este partido se están subiendo. ¡Volvé en un rato!"))) +
       "</section>" +
       (relacionados.length ?
         '<section class="bloque"><div class="fila-titulo"><h2 class="titulo-bloque">Más de ' + esc(p.categoria) + "</h2>" +
@@ -529,6 +568,8 @@
         break;
       case "partidos":
         html = vistaPartidos(ruta.params); marcarMenu("partidos"); tituloPagina = "Partidos"; break;
+      case "eventos":
+        html = vistaEventos(ruta.params); marcarMenu("eventos"); tituloPagina = "Eventos"; break;
       case "categorias":
         html = vistaCategorias(); marcarMenu("categorias"); tituloPagina = "Categorías"; break;
       case "buscar":
@@ -537,7 +578,7 @@
         break;
       case "partido":
         var p = porId[ruta.partes[1]];
-        html = vistaPartido(p); marcarMenu("fotos"); tituloPagina = p ? p.titulo + " · " + p.categoria : "Álbum no encontrado";
+        html = vistaPartido(p); marcarMenu(p ? (p.esEvento ? "eventos" : "partidos") : "fotos"); tituloPagina = p ? p.titulo + " · " + p.categoria : "Álbum no encontrado";
         if (p && foto > 0 && p.fotos.length) despues = function () { abrirVisor(p, foto - 1, false); };
         break;
       default:
