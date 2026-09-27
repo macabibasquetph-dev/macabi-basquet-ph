@@ -31,7 +31,7 @@
       portada: "012.jpg"              // opcional: qué foto usar de tapa (si no, la primera)
     },
 
-   Para un EVENTO sin rival (clínica, torneo, fiesta):
+   Para un EVENTO sin rival (clínica, torneo, fiesta) — aparece en la sección Eventos:
     {
       id: "2026-12-10-fiesta-fin-de-anio",
       temporada: "2026",
@@ -64,6 +64,440 @@ window.MACABI_DATOS = {
   partidos: [
 
     // ↓↓↓ Pegá acá abajo los partidos (usá la PLANTILLA de arriba) ↓↓↓
+
+    // ===== TIRA FORMATIVAS 2026 (U13, U15, U17, U19) =====
+    {
+      id: "2026-09-27-u13-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-09-27",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-09-27-u15-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-09-27",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-09-27-u17-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-09-27",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-09-27-u19-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-09-27",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-03-u13-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-10-03",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Cancha de Aldo Bonzi"
+    },
+    {
+      id: "2026-10-03-u15-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-10-03",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Cancha de Aldo Bonzi"
+    },
+    {
+      id: "2026-10-03-u17-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-10-03",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Cancha de Aldo Bonzi"
+    },
+    {
+      id: "2026-10-03-u19-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-10-03",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Cancha de Aldo Bonzi"
+    },
+    {
+      id: "2026-10-04-u13-all-boys",
+      temporada: "2026",
+      fecha: "2026-10-04",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-04-u15-all-boys",
+      temporada: "2026",
+      fecha: "2026-10-04",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-04-u17-all-boys",
+      temporada: "2026",
+      fecha: "2026-10-04",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-04-u19-all-boys",
+      temporada: "2026",
+      fecha: "2026-10-04",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-18-u13-deportivo-crovara",
+      temporada: "2026",
+      fecha: "2026-10-18",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Deportivo Crovara",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-18-u15-deportivo-crovara",
+      temporada: "2026",
+      fecha: "2026-10-18",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Deportivo Crovara",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-18-u17-deportivo-crovara",
+      temporada: "2026",
+      fecha: "2026-10-18",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Deportivo Crovara",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-18-u19-deportivo-crovara",
+      temporada: "2026",
+      fecha: "2026-10-18",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Deportivo Crovara",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-25-u13-huracan",
+      temporada: "2026",
+      fecha: "2026-10-25",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Huracán",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-25-u15-huracan",
+      temporada: "2026",
+      fecha: "2026-10-25",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Huracán",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-25-u17-huracan",
+      temporada: "2026",
+      fecha: "2026-10-25",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Huracán",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-25-u19-huracan",
+      temporada: "2026",
+      fecha: "2026-10-25",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Huracán",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-10-31-u13-circulo-urquiza",
+      temporada: "2026",
+      fecha: "2026-10-31",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Círculo Urquiza",
+      lugar: "Club Círculo General Urquiza"
+    },
+    {
+      id: "2026-10-31-u15-circulo-urquiza",
+      temporada: "2026",
+      fecha: "2026-10-31",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Círculo Urquiza",
+      lugar: "Club Círculo General Urquiza"
+    },
+    {
+      id: "2026-10-31-u17-circulo-urquiza",
+      temporada: "2026",
+      fecha: "2026-10-31",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Círculo Urquiza",
+      lugar: "Club Círculo General Urquiza"
+    },
+    {
+      id: "2026-10-31-u19-circulo-urquiza",
+      temporada: "2026",
+      fecha: "2026-10-31",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Círculo Urquiza",
+      lugar: "Club Círculo General Urquiza"
+    },
+    {
+      id: "2026-11-08-u13-nueva-chicago",
+      temporada: "2026",
+      fecha: "2026-11-08",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Nueva Chicago",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-08-u15-nueva-chicago",
+      temporada: "2026",
+      fecha: "2026-11-08",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Nueva Chicago",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-08-u17-nueva-chicago",
+      temporada: "2026",
+      fecha: "2026-11-08",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Nueva Chicago",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-08-u19-nueva-chicago",
+      temporada: "2026",
+      fecha: "2026-11-08",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Nueva Chicago",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-14-u13-san-lorenzo",
+      temporada: "2026",
+      fecha: "2026-11-14",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "San Lorenzo",
+      lugar: "Cancha de San Lorenzo"
+    },
+    {
+      id: "2026-11-14-u15-san-lorenzo",
+      temporada: "2026",
+      fecha: "2026-11-14",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "San Lorenzo",
+      lugar: "Cancha de San Lorenzo"
+    },
+    {
+      id: "2026-11-14-u17-san-lorenzo",
+      temporada: "2026",
+      fecha: "2026-11-14",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "San Lorenzo",
+      lugar: "Cancha de San Lorenzo"
+    },
+    {
+      id: "2026-11-14-u19-san-lorenzo",
+      temporada: "2026",
+      fecha: "2026-11-14",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "San Lorenzo",
+      lugar: "Cancha de San Lorenzo"
+    },
+    {
+      id: "2026-11-22-u13-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-11-22",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-22-u15-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-11-22",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-22-u17-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-11-22",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-22-u19-aldo-bonzi",
+      temporada: "2026",
+      fecha: "2026-11-22",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Aldo Bonzi",
+      lugar: "Club Macabi"
+    },
+    {
+      id: "2026-11-29-u13-all-boys-saavedra",
+      temporada: "2026",
+      fecha: "2026-11-29",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "All Boys Saavedra",
+      lugar: "Cancha de All Boys Saavedra"
+    },
+    {
+      id: "2026-11-29-u15-all-boys-saavedra",
+      temporada: "2026",
+      fecha: "2026-11-29",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "All Boys Saavedra",
+      lugar: "Cancha de All Boys Saavedra"
+    },
+    {
+      id: "2026-11-29-u17-all-boys-saavedra",
+      temporada: "2026",
+      fecha: "2026-11-29",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "All Boys Saavedra",
+      lugar: "Cancha de All Boys Saavedra"
+    },
+    {
+      id: "2026-11-29-u19-all-boys-saavedra",
+      temporada: "2026",
+      fecha: "2026-11-29",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "All Boys Saavedra",
+      lugar: "Cancha de All Boys Saavedra"
+    },
+    {
+      id: "2026-12-06-u13-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-12-06",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Náutico Buchardo"
+    },
+    {
+      id: "2026-12-06-u15-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-12-06",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Náutico Buchardo"
+    },
+    {
+      id: "2026-12-06-u17-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-12-06",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Náutico Buchardo"
+    },
+    {
+      id: "2026-12-06-u19-nautico-buchardo",
+      temporada: "2026",
+      fecha: "2026-12-06",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "Náutico Buchardo",
+      lugar: "Náutico Buchardo"
+    },
+    {
+      id: "2026-12-12-u13-all-boys",
+      temporada: "2026",
+      fecha: "2026-12-12",
+      categoria: "U13",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Atlético All Boys"
+    },
+    {
+      id: "2026-12-12-u15-all-boys",
+      temporada: "2026",
+      fecha: "2026-12-12",
+      categoria: "U15",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Atlético All Boys"
+    },
+    {
+      id: "2026-12-12-u17-all-boys",
+      temporada: "2026",
+      fecha: "2026-12-12",
+      categoria: "U17",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Atlético All Boys"
+    },
+    {
+      id: "2026-12-12-u19-all-boys",
+      temporada: "2026",
+      fecha: "2026-12-12",
+      categoria: "U19",
+      equipo: "Macabi",
+      rival: "All Boys",
+      lugar: "Club Atlético All Boys"
+    },
 
   ]
 };
