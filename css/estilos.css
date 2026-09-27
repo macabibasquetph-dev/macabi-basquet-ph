@@ -101,6 +101,16 @@ body[data-vista="inicio"] #contenido { padding-top: 0; }
 .marca-txt em { font-style: normal; color: var(--naranja); }
 
 .nav { display: none; align-items: center; gap: 4px; }
+/* Botón de categorías arriba a la derecha (solo celular) */
+.barra-cat {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--linea-fuerte);
+  font-family: var(--fuente-titulo); font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em;
+  background: rgba(10, 10, 11, 0.5);
+}
+.barra-cat svg { width: 16px; height: 16px; }
+.barra-cat.activo { background: var(--naranja); border-color: var(--naranja); color: #111; }
+@media (max-width: 370px) { .barra-cat span { display: none; } }
 .nav a {
   font-family: var(--fuente-titulo); font-weight: 700; font-size: 1.05rem;
   text-transform: uppercase; letter-spacing: 0.06em;
@@ -129,10 +139,10 @@ body[data-vista="inicio"] #contenido { padding-top: 0; }
 }
 .tabbar a {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  color: var(--texto-3); font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--texto-3); font-size: 10.5px; font-weight: 600; letter-spacing: 0; min-width: 0; white-space: nowrap;
   transition: color .2s;
 }
-.tabbar a svg { width: 23px; height: 23px; }
+.tabbar a svg { width: 22px; height: 22px; }
 .tabbar a.activo { color: var(--naranja); }
 .tabbar a.tabbar-buscar svg {
   width: 46px; height: 46px; padding: 11px; margin-top: -14px;
@@ -711,7 +721,7 @@ body[data-vista="inicio"] #contenido { padding-top: 0; }
 
 @media (min-width: 900px) {
   body { padding-bottom: 0; }
-  .tabbar { display: none; }
+  .tabbar, .barra-cat { display: none; }
   .nav { display: flex; }
   .aviso { bottom: 28px; }
 
